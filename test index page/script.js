@@ -44,14 +44,13 @@ function startDisconnect(){
     console.log("Started disconnect");
 }
 
-function publishMessage(){
-msg = document.getElementById("Message").value;
-topic = 'ivan';
+function publishMessage(message){
+    msg = message;
+    topic = 'ivan';
 
-Message = new Paho.MQTT.Message(msg);
-Message.destinationName = topic;
+    Message = new Paho.MQTT.Message(msg);
+    Message.destinationName = topic;
 
-client.send(Message);
-document.getElementById("messages").innerHTML += "<span> Message to topic "+topic+" is sent </span><br>";
-
+    client.send(Message);
+    console.log("Message to topic "+topic+" is sent");
 }
