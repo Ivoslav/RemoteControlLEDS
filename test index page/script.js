@@ -2,13 +2,13 @@ function startConnect(){
 
     clientID = "clientID - "+parseInt(Math.random() * 100);
 
-    host = document.getElementById("host").value;   
-    port = document.getElementById("port").value;  
-    userId  = document.getElementById("username").value;  
-    password = document.getElementById("password").value;  
+    host = "test.mosquitto.org";   
+    port = "8080";
+    userId  = ""; 
+    password = "";  
 
-    document.getElementById("messages").innerHTML += "<span> Connecting to " + host + " on port " +port+"</span><br>";
-    document.getElementById("messages").innerHTML += "<span> Using the client Id " + clientID +" </span><br>";
+    console.log("Connecting to " + host + " on port " +port);
+    console.log("Using the client Id " + clientID);
 
     client = new Paho.MQTT.Client(host, Number(port), clientID);
 
@@ -23,8 +23,35 @@ function startConnect(){
 }
 
 function onConnectionLost(responseObject){
-    document.getElementById("messages").innerHTML += "<span> ERROR: Connection is lost.</span><br>";
+    console.log("ERROR: Connection is lost.");
     if(responseObject !=0){
-        document.getElementById("messages").innerHTML += "<span> ERROR:"+ responseObject.errorMessage +"</span><br>";
+        console.log("ERROR: "+ responseObject.errorMessage);
     }
+}
+
+function onMessageArrived(message){
+    console.log(message.payloadString);
+}
+
+function onConnect(){
+    topic =  'ivan';
+    console.log("Subscribing to topic "+topic);
+    client.subscribe(topic);
+}
+
+function startDisconnect(){
+    client.disconnect();
+    console.log("Started disconnect");
+}
+
+function publishMessage(){
+msg = document.getElementById("Message").value;
+topic = 'ivan';
+
+Message = new Paho.MQTT.Message(msg);
+Message.destinationName = topic;
+
+client.send(Message);
+document.getElementById("messages").innerHTML += "<span> Message to topic "+topic+" is sent </span><br>";
+
 }
