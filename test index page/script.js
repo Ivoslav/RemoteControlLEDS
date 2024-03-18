@@ -54,3 +54,38 @@ function publishMessage(message){
     client.send(Message);
     console.log("Message to topic "+topic+" is sent");
 }
+
+function addNewRoom() {
+    // Prompt the user for the new room name
+    var roomName = prompt("Enter the name of the new room:");
+
+    if (roomName) { // If the user entered a room name
+        // Create a new room div
+        var newRoomDiv = document.createElement("div");
+        newRoomDiv.classList.add("room");
+
+        // Create a heading for the new room
+        var roomHeading = document.createElement("h2");
+        roomHeading.textContent = roomName;
+
+        // Create a button for the new room
+        var roomButton = document.createElement("button");
+        roomButton.classList.add("lightBtn");
+        roomButton.textContent = "Turn On";
+        roomButton.setAttribute("onclick", "publishMessage('" + roomName.toLowerCase().replace(/\s/g, '') + "')");
+
+        // Append the heading and button to the new room div
+        newRoomDiv.appendChild(roomHeading);
+        newRoomDiv.appendChild(roomButton);
+
+        // Append the new room div before the "Add new room" button
+        var addNewRoomButton = document.getElementById("addNewRoom").parentNode;
+        addNewRoomButton.parentNode.insertBefore(newRoomDiv, addNewRoomButton);
+
+        // Subscribe to the new room's topic
+        client.subscribe(roomName.toLowerCase().replace(/\s/g, ''));
+
+        console.log("New room '" + roomName + "' added.");
+    }
+}
+
