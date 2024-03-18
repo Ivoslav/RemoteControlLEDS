@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>High Voltages - MQTT</title>
-        <link rel="stylesheet" href="style.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.2/mqttws31.min.js" type="text/javascript"></script>
-        <script src="script.js" type="text/javascript"></script>
-     </head>
-     <body onload="startConnect()">
-        <h1>Apartment Lights Control</h1>
-        <div class="rooms">
-            <div class="room">
-                <h2>Living Room</h2>
-                <button id="livingRoomBtn" class="lightBtn" onclick="publishMessage('lvng')">Turn On</button>
-            </div>
-            <div class="room">
-                <h2>Bedroom</h2>
-                <button id="bedroomBtn" class="lightBtn" onclick="publishMessage('bd')">Turn On</button>
-            </div>
-                    <!-- <input type="button" onclick="startConnect()"  value="Connect">
-                    <input type="button"  onclick="startDisconnect()" value="Disconnect"> -->
-            <div class="room">
-                <h2>Add new room</h2>
-                <button id="addNewRoom" class="lightBtn" onclick="addNewRoom()">Add new room</button>
-            </div>
+<head>
+    <meta charset="utf-8">
+    <title>High Voltages - MQTT</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.2/mqttws31.min.js" type="text/javascript"></script>
+    <script src="script.js" type="text/javascript"></script>
+</head>
+<body onload="startConnect()">
+    <h1>Apartment Lights Control</h1>
+    <div class="rooms">
+        <div class="room">
+            <h2>Living Room</h2>
+            <button class="lightBtn" onclick="publishMessage('lvng')">Turn On</button>
+            <button class="lightBtn" onclick="removeRoom(this)">Remove</button>
         </div>
-    </body>
+        <div class="room">
+            <h2>Bedroom</h2>
+            <button class="lightBtn" onclick="publishMessage('bd')">Turn On</button>
+            <button class="lightBtn" onclick="removeRoom(this)">Remove</button>
+        </div>
+        <div class="room">
+            <h2>Add new room</h2>
+            <button id="addNewRoom" class="lightBtn" onclick="addNewRoom()">Add new room</button>
+        </div>
+    </div>
+</body>
 </html>

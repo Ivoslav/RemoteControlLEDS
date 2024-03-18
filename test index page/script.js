@@ -74,9 +74,16 @@ function addNewRoom() {
         roomButton.textContent = "Turn On";
         roomButton.setAttribute("onclick", "publishMessage('" + roomName.toLowerCase().replace(/\s/g, '') + "')");
 
-        // Append the heading and button to the new room div
+        // Create a remove button for the new room
+        var removeButton = document.createElement("button");
+        removeButton.classList.add("lightBtn");
+        removeButton.textContent = "Remove";
+        removeButton.setAttribute("onclick", "removeRoom(this)");
+
+        // Append the heading, buttons, and remove button to the new room div
         newRoomDiv.appendChild(roomHeading);
         newRoomDiv.appendChild(roomButton);
+        newRoomDiv.appendChild(removeButton);
 
         // Append the new room div before the "Add new room" button
         var addNewRoomButton = document.getElementById("addNewRoom").parentNode;
@@ -87,5 +94,11 @@ function addNewRoom() {
 
         console.log("New room '" + roomName + "' added.");
     }
+}
+
+function removeRoom(button) {
+    var roomToRemove = button.parentNode;
+    roomToRemove.parentNode.removeChild(roomToRemove);
+    console.log("Room removed.");
 }
 
