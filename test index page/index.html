@@ -9,21 +9,17 @@
 </head>
 <body onload="startConnect()">
     <h1>Apartment Lights Control</h1>
-    <div class="rooms">
-        <div class="room">
-            <h2>Living Room</h2>
-            <button class="lightBtn" onclick="publishMessage('lvng')">Turn On</button>
-            <button class="lightBtn" onclick="removeRoom(this)">Remove</button>
-        </div>
-        <div class="room">
-            <h2>Bedroom</h2>
-            <button class="lightBtn" onclick="publishMessage('bd')">Turn On</button>
-            <button class="lightBtn" onclick="removeRoom(this)">Remove</button>
-        </div>
-        <div class="room">
+    <div class="rooms" id="roomsContainer">
+        <div class="room" id="addNewRoomDiv">
             <h2>Add new room</h2>
             <button id="addNewRoom" class="lightBtn" onclick="addNewRoom()">Add new room</button>
         </div>
     </div>
 </body>
 </html>
+
+<!-- <div class="room">
+                            <h2>Living Room</h2>
+                            <button class="lightBtn" onclick="publishMessage('lvng')">Turn On</button>
+                            <button class="lightBtn" onclick="removeRoom(this)">Remove</button>
+                        </div> -->
