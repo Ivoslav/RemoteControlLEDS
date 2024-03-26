@@ -1,7 +1,35 @@
 import paho.mqtt.client as mqtt
+import RPi.GPIO as GPIO
+
+# GPIO setup
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(20, GPIO.OUT)  # GPIO for the first GPIO
+GPIO.setup(21, GPIO.OUT)  # GPIO for the second GPIO
+GPIO.setup(26, GPIO.OUT)  # GPIO for the third GPIO
 
 def on_message(client, userdata, message):
-    print("Received message:", str(message.payload.decode("utf-8")))
+    payload = str(message.payload.decode("utf-8"))
+    print("Received message:", payload)
+    
+    # Parse the room name and state from the payload
+    room_name, state = payload.split()
+    
+    # Control GPIO based on room name and state
+    if room_name == "test1":
+        if state == "on":
+            GPIO.output(20, GPIO.HIGH)
+        elif state == "off":
+            GPIO.output(20, GPIO.LOW)
+    elif room_name == "test2":
+        if state == "on":
+            GPIO.output(21, GPIO.HIGH)
+        elif state == "off":
+            GPIO.output(21, GPIO.LOW)
+    elif room_name == "test3":
+        if state == "on":
+            GPIO.output(26, GPIO.HIGH)
+        elif state == "off":
+            GPIO.output(26, GPIO.LOW)
 
 broker_address = "test.mosquitto.org"
 print("Creating new instance")
