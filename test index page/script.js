@@ -35,7 +35,8 @@ function addNewRoom() {
         var roomButton = document.createElement("button");
         roomButton.classList.add("lightBtn");
         roomButton.textContent = "Turn On";
-        roomButton.setAttribute("onclick", "publishMessage('" + roomName.toLowerCase().replace(/\s/g, '') + "')");
+        roomButton.setAttribute("data-state", "on"); // Add data attribute to track state
+        roomButton.setAttribute("onclick", "toggleRoom(this)");
 
         var removeButton = document.createElement("button");
         removeButton.classList.add("lightBtn");
@@ -136,13 +137,28 @@ function startDisconnect(){
     console.log("Started disconnect");
 }
 
-function publishMessage(message){
-    msg = message;
-    topic = 'ivan';
+function toggleRoom(button) {
+    var currentState = button.getAttribute("data-state");
+    var roomName = button.parentNode.querySelector("h2").textContent;
 
-    Message = new Paho.MQTT.Message(msg);
+    if (currentState === "on") {
+        publishMessage(roomName.toLowerCase().replace(/\s/g, ''), 'on');
+        button.textContent = "Turn Off";
+        button.setAttribute("data-state", "off");
+    } else {
+        publishMessage(roomName.toLowerCase().replace(/\s/g, ''), 'off');
+        button.textContent = "Turn On";
+        button.setAttribute("data-state", "on");
+    }
+}
+
+function publishMessage(roomName, state) {
+    var topic = 'ivan'; // Always set topic to 'ivan'
+
+    var message = roomName + ' ' + state; // Include state in the message
+    var Message = new Paho.MQTT.Message(message);
     Message.destinationName = topic;
 
     client.send(Message);
-    console.log("Message to topic "+topic+" is sent");
+    console.log("Message to topic " + topic + " is sent");
 }
