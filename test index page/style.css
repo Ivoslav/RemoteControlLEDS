@@ -1,17 +1,34 @@
-body {
-    font-family: Arial, sans-serif;
+/* Reset styles */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+/* Typography */
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    background-color: #f7f7f7; /* Light gray background */
 }
 
 h1 {
     text-align: center;
+    margin-top: 40px;
+    color: #333; /* Dark gray */
 }
 
+h2 {
+    color: #333; /* Dark gray */
+}
+
+/* Layout */
 .rooms {
-    display: flex;
+    display: flex;  
+    flex-wrap: wrap;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
 .room {
@@ -20,10 +37,38 @@ h1 {
     border: 1px solid #ccc;
     border-radius: 5px;
     text-align: center;
+    background-color: #fff; /* White background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    transition: transform 0.3s ease;
 }
 
+.room:hover {
+    transform: translateY(-5px); /* Move up slightly on hover */
+}
+
+/* Buttons */
 .lightBtn {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
+    background-color: #ffc107; /* Yellow */
+    color: #333; /* Dark gray */
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.lightBtn:hover {
+    background-color: #ffca28; /* Lighter yellow on hover */
+}
+
+/* Add new room button */
+#addNewRoomDiv {
+    text-align: center;
+}
+
+.room-buttons {
+    margin-top: 10px; /* Add margin between buttons */
+    display: flex;
+    justify-content: center;
 }
