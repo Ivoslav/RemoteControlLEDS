@@ -1,5 +1,6 @@
 import paho.mqtt.client as mqtt
 import RPi.GPIO as GPIO
+import uuid
 
 # GPIO setup
 GPIO.setmode(GPIO.BCM)
@@ -33,7 +34,8 @@ def on_message(client, userdata, message):
 
 broker_address = "test.mosquitto.org"
 print("Creating new instance")
-client = mqtt.Client()
+client_id = str(uuid.uuid4())
+client = mqtt.Client(client_id=client_id)
 print("Connecting to broker")
 client.connect(broker_address)
 print("Subscribing to topic 'ivan'")
