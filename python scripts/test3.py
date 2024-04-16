@@ -1,4 +1,11 @@
 import paho.mqtt.client as mqtt
+import RPi.GPIO as GPIO
+
+# Set up GPIO mode
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(20, GPIO.OUT)
+GPIO.setup(21, GPIO.OUT)
+GPIO.setup(26, GPIO.OUT)
 
 # Callback function to handle when the client connects to the broker
 def on_connect(client, userdata, flags, rc):
@@ -18,11 +25,22 @@ def on_message(client, userdata, msg):
     room_name, state = payload_parts[:2]
     # Control GPIO based on room name and state
     if room_name == "test1":
-        print("Controlled test1 with state:", state)
+        if state == "on":
+            GPIO.output(20, GPIO.HIGH)
+        elif state == "off":
+            GPIO.output(20, GPIO.LOW)
     elif room_name == "test2":
-        print("Controlled test2 with state:", state)
+        if state == "on":
+            GPIO.output(21, GPIO.HIGH)
+        elif state == "off":
+            GPIO.output(21, GPIO.LOW)
     elif room_name == "test3":
-        print("Controlled test3 with state:", state)
+        if state == "on":
+            GPIO.output(26, GPIO.HIGH)
+        elif state == "off":
+            GPIO.output(26, GPIO.LOW)
+
+    print("Controlled", room_name, "with state:", state)
 
 # Create a client instance
 client = mqtt.Client()
