@@ -20,7 +20,7 @@ function startConnect(){
         password: password
     });
 
-    displayRoomsFromLocalStorage(); // Display rooms from local storage
+    displayRoomsFromLocalStorage();
 }
 
 function addNewRoom() {
@@ -35,7 +35,7 @@ function addNewRoom() {
         var roomButton = document.createElement("button");
         roomButton.classList.add("lightBtn");
         roomButton.textContent = "Turn On";
-        roomButton.setAttribute("data-state", "on"); // Add data attribute to track state
+        roomButton.setAttribute("data-state", "on");
         roomButton.setAttribute("onclick", "toggleRoom(this)");
 
         var removeButton = document.createElement("button");
@@ -53,7 +53,6 @@ function addNewRoom() {
         client.subscribe(roomName.toLowerCase().replace(/\s/g, ''));
         console.log("New room '" + roomName + "' added.");
 
-        // Save to local storage
         saveRoomToLocalStorage(roomName);
     }
 }
@@ -114,7 +113,6 @@ function removeRoomFromLocalStorage(roomName) {
     }
 }
 
-
 function onConnectionLost(responseObject){
     console.log("ERROR: Connection is lost.");
     if(responseObject !=0){
@@ -130,11 +128,13 @@ function onConnect(){
     topic =  'ivan';
     console.log("Subscribing to topic "+topic);
     client.subscribe(topic);
-}
 
-function startDisconnect(){
-    client.disconnect();
-    console.log("Started disconnect");
+    var message = 'TEST';
+    var Message = new Paho.MQTT.Message(message);
+    Message.destinationName = topic;
+
+    client.send(Message);
+    console.log("Test " + topic + " is sent");
 }
 
 function toggleRoom(button) {
@@ -153,9 +153,9 @@ function toggleRoom(button) {
 }
 
 function publishMessage(roomName, state) {
-    var topic = 'ivan'; // Always set topic to 'ivan'
+    var topic = 'ivan';
 
-    var message = roomName + ' ' + state; // Include state in the message
+    var message = roomName + ' ' + state;
     var Message = new Paho.MQTT.Message(message);
     Message.destinationName = topic;
 

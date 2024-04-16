@@ -8,8 +8,14 @@ def on_connect(client, userdata, flags, rc):
 # Callback function to handle when a message is received
 def on_message(client, userdata, msg):
     payload = msg.payload.decode()
-    room_name, state = payload.split()
+    payload_parts = payload.split()
 
+    # Check if payload has at least two parts
+    if len(payload_parts) < 2:
+        print("Invalid payload:", payload)
+        return
+
+    room_name, state = payload_parts[:2]
     # Control GPIO based on room name and state
     if room_name == "test1":
         print("Controlled test1 with state:", state)

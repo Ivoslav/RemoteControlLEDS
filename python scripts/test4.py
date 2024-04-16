@@ -6,7 +6,6 @@ def on_connect(client, userdata, flags, rc):
     client.subscribe("ivan")
 
 # Callback function to handle when a message is received
-# Callback function to handle when a message is received
 def on_message(client, userdata, msg):
     payload = msg.payload.decode()
     payload_parts = payload.split()
