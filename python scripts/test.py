@@ -4,9 +4,9 @@ import uuid
 
 # GPIO setup
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(20, GPIO.OUT, initial=GPIO.LOW)  # GPIO for the first GPIO, initial state LOW
-GPIO.setup(21, GPIO.OUT, initial=GPIO.LOW)  # GPIO for the second GPIO, initial state LOW
-GPIO.setup(26, GPIO.OUT, initial=GPIO.LOW)  # GPIO for the third GPIO, initial state LOW
+GPIO.setup(20, GPIO.OUT, initial=GPIO.HIGH)  # GPIO for the first GPIO, initial state LOW
+GPIO.setup(21, GPIO.OUT, initial=GPIO.HIGH)  # GPIO for the second GPIO, initial state LOW
+GPIO.setup(26, GPIO.OUT, initial=GPIO.HIGH)  # GPIO for the third GPIO, initial state LOW
 
 def on_message(client, userdata, message):
     payload = str(message.payload.decode("utf-8"))
