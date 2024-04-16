@@ -28,7 +28,7 @@ def on_message(client, userdata, msg):
 
 
 # Create a client instance
-client = mqtt.Client()
+client = mqtt.Client("Ivoslav")
 
 # Set callback functions
 client.on_connect = on_connect
