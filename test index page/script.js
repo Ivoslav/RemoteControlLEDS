@@ -34,7 +34,7 @@ function addNewRoom() {
 
         var roomButton = document.createElement("button");
         roomButton.classList.add("lightBtn");
-        roomButton.textContent = "Turn On";
+        roomButton.textContent = "On";
         roomButton.setAttribute("data-state", "on");
         roomButton.setAttribute("onclick", "toggleRoom(this)");
 
@@ -79,7 +79,7 @@ function addRoomFromLocalStorage(roomName) {
 
     var roomButton = document.createElement("button");
     roomButton.classList.add("lightBtn");
-    roomButton.textContent = "Turn On";
+    roomButton.textContent = "On";
     roomButton.setAttribute("onclick", "publishMessage('" + roomName.toLowerCase().replace(/\s/g, '') + "')");
 
     var removeButton = document.createElement("button");
@@ -143,11 +143,11 @@ function toggleRoom(button) {
 
     if (currentState === "on") {
         publishMessage(roomName.toLowerCase().replace(/\s/g, ''), 'on');
-        button.textContent = "Turn Off";
+        button.textContent = "Off";
         button.setAttribute("data-state", "off");
     } else {
         publishMessage(roomName.toLowerCase().replace(/\s/g, ''), 'off');
-        button.textContent = "Turn On";
+        button.textContent = "On";
         button.setAttribute("data-state", "on");
     }
 }
