@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
   if (empty($user_login_err) && empty($user_password_err)) {
-    $sql = "SELECT id, username, password FROM users WHERE username = ? OR email = ?";
+    $sql = "SELECT users_id, username, password FROM users WHERE username = ? OR email = ?";
 
     if ($stmt = mysqli_prepare($link, $sql)) {
       mysqli_stmt_bind_param($stmt, "ss", $param_user_login, $param_user_login);
@@ -36,11 +36,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         mysqli_stmt_store_result($stmt);
 
         if (mysqli_stmt_num_rows($stmt) == 1) {
-          mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password);
+          mysqli_stmt_bind_result($stmt, $users_id, $username, $hashed_password);
 
           if (mysqli_stmt_fetch($stmt)) {
             if (password_verify($user_password, $hashed_password)) {
-              $_SESSION["id"] = $id;
+              # Store users_id in session
+              $_SESSION["users_id"] = $users_id;
               $_SESSION["username"] = $username;
               $_SESSION["loggedin"] = TRUE;
               echo "<script>" . "window.location.href='./'" . "</script>";
@@ -65,6 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   mysqli_close($link);
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
