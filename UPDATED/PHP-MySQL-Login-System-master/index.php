@@ -31,6 +31,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== TRUE) {
       <div class="col-lg-5 text-center">
         <img src="./img/blank-avatar.jpg" class="img-fluid rounded" alt="User avatar" width="180">
         <h4 class="my-4">Hello, <?= htmlspecialchars($_SESSION["username"]); ?></h4>
+        <h4 class="my-4">Your ID is <?= htmlspecialchars($_SESSION["users_id"]); ?></h4>
+
         <a href="./logout.php" class="btn btn-primary">Log Out</a>
       </div>
     </div>
