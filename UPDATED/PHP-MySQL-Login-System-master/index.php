@@ -87,24 +87,55 @@ mysqli_close($link);
         </div>  
     </div>
 
-     <!-- Display rooms -->
-  <div class="container mt-5 d-flex flex-column justify-content-center align-items-center">
-    <h2>Your Rooms:</h2>
-    <div class="rooms" id="roomsContainer">
-      <?php
-      // Loop through rooms and display them
-      foreach ($rooms as $room) {
-        echo "<div class='room card p-3 text-center'>";
-        echo "<h4 class='my-4'>$room</h4>";
-        echo "<button class='btn btn-primary btn-lg' data-state='on' onclick='toggleRoom(this)'>On</button>";
-        echo "</div>";
-      }
-      ?>
+    <div class="container mt-5 d-flex flex-column justify-content-center align-items-center">
+        <h2>Your Rooms:</h2>
+        <div class="rooms" id="roomsContainer">
+            <?php
+            foreach ($rooms as $room) {
+                echo "<div class='room card p-3 text-center position-relative'>";
+                echo "<h4 class='my-4'>$room</h4>";
+                echo "<button class='btn btn-danger btn-sm remove-btn position-absolute top-0 end-0 d-none' onclick='removeRoom(this)'>X</button>";
+                echo "<button class='btn btn-primary btn-lg' data-room='$room' onclick='toggleRoom(this)'>On</button>";
+                echo "</div>";
+            }
+            ?>
+        </div>
     </div>
-  </div>
 
     <script>
     var userId = <?php echo json_encode($_SESSION["users_id"]); ?>;
+
+        // Show remove button on hover
+        document.querySelectorAll('.room').forEach(room => {
+            room.addEventListener('mouseenter', () => {
+                room.querySelector('.remove-btn').classList.remove('d-none');
+            });
+            room.addEventListener('mouseleave', () => {
+                room.querySelector('.remove-btn').classList.add('d-none');
+            });
+        });
+
+        function removeRoom(button) {
+            var roomName = button.parentElement.querySelector('h4').textContent;
+            var confirmation = confirm("Are you sure you want to remove the room '" + roomName + "'?");
+            if (confirmation) {
+                // Send an AJAX request to remove the room from the database
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "remove_room.php", true);
+                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        // If the room is successfully removed, remove the corresponding card from the UI
+                        if (xhr.responseText.trim() === "success") {
+                            button.parentElement.remove();
+                        } else {
+                            alert("Failed to remove the room. Please try again.");
+                        }
+                    }
+                };
+                xhr.send("room=" + encodeURIComponent(roomName));
+            }
+        }
 </script>
 
 </body>
