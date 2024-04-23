@@ -2,31 +2,25 @@ function addNewRoom() {
     var roomName = prompt("Enter the name of the new room:");
     if (roomName) {
         var newRoomDiv = document.createElement("div");
-        newRoomDiv.classList.add("room");
+        newRoomDiv.classList.add("room", "card", "p-3", "text-center");
 
-        var roomHeading = document.createElement("h2");
+        var roomHeading = document.createElement("h4");
+        roomHeading.classList.add("my-4");
         roomHeading.textContent = roomName;
 
         var roomButton = document.createElement("button");
-        roomButton.classList.add("lightBtn");
+        roomButton.classList.add("btn", "btn-primary", "btn-lg");
         roomButton.textContent = "On";
         roomButton.setAttribute("data-state", "on");
         roomButton.setAttribute("onclick", "toggleRoom(this)");
 
-        var removeButton = document.createElement("button");
-        removeButton.classList.add("lightBtn");
-        removeButton.textContent = "Remove";
-        removeButton.setAttribute("onclick", "removeRoom(this)");
-
         newRoomDiv.appendChild(roomHeading);
         newRoomDiv.appendChild(roomButton);
-        newRoomDiv.appendChild(removeButton);
 
         var roomsContainer = document.getElementById("roomsContainer");
-        roomsContainer.insertBefore(newRoomDiv, roomsContainer.lastElementChild);
+        roomsContainer.appendChild(newRoomDiv);
 
         client.subscribe(roomName.toLowerCase().replace(/\s/g, ''));
         console.log("New room '" + roomName + "' added.");
-
     }
 }
