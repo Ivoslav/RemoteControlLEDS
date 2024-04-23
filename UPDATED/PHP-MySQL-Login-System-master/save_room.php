@@ -14,4 +14,3 @@ $stmt = $link->prepare("INSERT INTO rooms (user_id, room_name, is_on, created_at
 $stmt->execute([$userId, $roomName, 1]);
 
 echo "Room '" . $roomName . "' uploaded successfully.";
-?>

@@ -21,8 +21,6 @@ function addNewRoom() {
         var roomsContainer = document.getElementById("roomsContainer");
         roomsContainer.appendChild(newRoomDiv);
 
-        // console.log("New room '" + roomName + "' added.");
-
         var xhr = new XMLHttpRequest();
         xhr.open("POST", 'save_room.php', true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
