@@ -1,10 +1,28 @@
 <?php
 session_start();
 
+// Include config file
+require_once "config.php";
+
+// Check if user is logged in
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== TRUE) {
-  echo "<script>" . "window.location.href='./login.php';" . "</script>";
+  echo "<script>window.location.href='./login.php';</script>";
   exit;
 }
+
+// Fetch rooms for the current user
+$user_id = $_SESSION["users_id"];
+$sql = "SELECT * FROM rooms WHERE user_id = $user_id";
+$result = mysqli_query($link, $sql);
+$rooms = [];
+if ($result && mysqli_num_rows($result) > 0) {
+  while ($row = mysqli_fetch_assoc($result)) {
+    $rooms[] = $row["room_name"];
+  }
+}
+
+// Close connection
+mysqli_close($link);
 ?>
 
 <!DOCTYPE html>
@@ -69,9 +87,21 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== TRUE) {
         </div>  
     </div>
 
-    <div class="container mt-5 d-flex flex-column justify-content-center align-items-center">
-        <div class="rooms" id="roomsContainer"></div>
+     <!-- Display rooms -->
+  <div class="container mt-5 d-flex flex-column justify-content-center align-items-center">
+    <h2>Your Rooms:</h2>
+    <div class="rooms" id="roomsContainer">
+      <?php
+      // Loop through rooms and display them
+      foreach ($rooms as $room) {
+        echo "<div class='room card p-3 text-center'>";
+        echo "<h4 class='my-4'>$room</h4>";
+        echo "<button class='btn btn-primary btn-lg' data-state='on' onclick='toggleRoom(this)'>On</button>";
+        echo "</div>";
+      }
+      ?>
     </div>
+  </div>
 
     <script>
     var userId = <?php echo json_encode($_SESSION["users_id"]); ?>;
