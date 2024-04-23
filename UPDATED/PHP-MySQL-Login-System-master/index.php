@@ -86,7 +86,7 @@ mysqli_close($link);
 </head>
 
 <body class="d-flex flex-column justify-content-center align-items-center">
-<button id="darkModeToggle" class="btn btn-primary position-absolute top-0 end-0 mt-2 me-2">Dark Mode</button>
+<button id="darkModeToggle" class="btn btn-primary position-absolute top-0 end-0 mt-2 me-2">🌙</button>
 
     <div class="alert alert-success my-5">
         Welcome! You are now signed in to your account.
