@@ -75,7 +75,6 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== TRUE) {
 
     <script>
     var userId = <?php echo json_encode($_SESSION["users_id"]); ?>;
-
 </script>
 
 </body>
