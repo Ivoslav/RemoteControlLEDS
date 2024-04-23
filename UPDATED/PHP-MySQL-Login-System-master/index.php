@@ -75,7 +75,7 @@ mysqli_close($link);
     <div class="container testBorder">
         <div class="row justify-content-center">
             <div class=" text-center">
-                <img src="./img/blank-avatar.jpg" style="margin-top: 10px;" class="img-fluid rounded-circle border border-3 border-primary"
+                <img src="./img/capy.jpg" style="margin-top: 10px;" class="img-fluid rounded-circle border border-3 border-primary"
                     alt="User avatar" width="120">
                 <h4 class="my-4 text-primary">Hello, <?= htmlspecialchars($_SESSION["username"]); ?></h4>
                 <h4 class="my-4 text-secondary">Your ID is <?= htmlspecialchars($_SESSION["users_id"]); ?></h4>
