@@ -31,6 +31,7 @@ mysqli_close($link);
     <title>User login system</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.2/mqttws31.min.js" type="text/javascript"></script>
     <script src="script.js" type="text/javascript"></script>
     <style>
         .rooms {
@@ -74,7 +75,7 @@ mysqli_close($link);
     <link rel="shortcut icon" href="./img/favicon-16x16.png" type="image/x-icon">
 </head>
 
-<body class="d-flex flex-column justify-content-center align-items-center">
+<body class="d-flex flex-column justify-content-center align-items-center" onload="startConnect()">
     <button id="darkModeToggle" class="btn btn-primary position-absolute top-0 end-0 mt-2 me-2">🌙</button>
 
     <div class="alert alert-success my-5">

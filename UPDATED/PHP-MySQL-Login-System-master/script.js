@@ -1,4 +1,5 @@
 var roomName;
+
 function addNewRoom() {
     roomName = prompt("Enter the name of the new room:");
     if (roomName) {
@@ -11,7 +12,7 @@ function addNewRoom() {
 
         var roomButton = document.createElement("button");
         roomButton.classList.add("btn", "btn-primary", "btn-lg");
-        roomButton.textContent = "On";
+        roomButton.textContent = "Turn On";
         roomButton.setAttribute("data-state", "on");
         roomButton.setAttribute("onclick", "toggleRoom(this)");
 
@@ -33,3 +34,75 @@ function addNewRoom() {
     }
 }
 
+function toggleRoom(button) {
+    var currentState = button.getAttribute("data-state");
+    var roomName = button.parentNode.querySelector("h4").textContent; // Corrected to "h4"
+
+    if (currentState === "on") {
+        publishMessage(roomName.toLowerCase().replace(/\s/g, ''), 'on');
+        button.textContent = "Turn Off";
+        button.setAttribute("data-state", "off");
+    } else {
+        publishMessage(roomName.toLowerCase().replace(/\s/g, ''), 'off');
+        button.textContent = "Turn On";
+        button.setAttribute("data-state", "on");
+    }
+}
+
+function publishMessage(roomName, state) {
+    var topic = 'ivan';
+
+    var message = roomName + ' ' + state;
+    var Message = new Paho.MQTT.Message(message);
+    Message.destinationName = topic;
+
+    client.send(Message);
+    console.log("Message to topic " + topic + " is sent");
+}
+
+function startConnect() {
+    clientID = "clientID - " + parseInt(Math.random() * 100);
+
+    host = "test.mosquitto.org";
+    port = "8080";
+    userId = "";
+    password = "";
+
+    console.log("Connecting to " + host + " on port " + port);
+    console.log("Using the client Id " + clientID);
+
+    client = new Paho.MQTT.Client(host, Number(port), clientID);
+
+    client.onConnectionLost = onConnectionLost;
+    client.onMessageArrived = onMessageArrived;
+
+    client.connect({
+        onSuccess: onConnect,
+        userName: userId,
+        password: password
+    });
+}
+
+function onConnectionLost(responseObject) {
+    console.log("ERROR: Connection is lost.");
+    if (responseObject != 0) {
+        console.log("ERROR: " + responseObject.errorMessage);
+    }
+}
+
+function onMessageArrived(message) {
+    console.log(message.payloadString);
+}
+
+function onConnect() {
+    topic = 'ivan';
+    console.log("Subscribing to topic " + topic);
+    client.subscribe(topic);
+
+    var message = 'TEST';
+    var Message = new Paho.MQTT.Message(message);
+    Message.destinationName = topic;
+
+    client.send(Message);
+    console.log("Test " + topic + " is sent");
+}
