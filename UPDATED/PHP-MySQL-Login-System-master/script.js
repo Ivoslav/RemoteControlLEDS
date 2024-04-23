@@ -1,5 +1,6 @@
+var roomName;
 function addNewRoom() {
-    var roomName = prompt("Enter the name of the new room:");
+    roomName = prompt("Enter the name of the new room:");
     if (roomName) {
         var newRoomDiv = document.createElement("div");
         newRoomDiv.classList.add("room", "card", "p-3", "text-center");
