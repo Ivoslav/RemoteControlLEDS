@@ -64,15 +64,34 @@ mysqli_close($link);
         .testWidth {
           width: 200px;
         }
+
+        .dark-mode {
+            background-color: #212529;
+            color: #fff;
+
+            /* Target specific elements that might not inherit well */
+            h1, h2, h3, h4, h5, h6, p, a {
+                color: inherit;
+            }
+
+            /* Target Bootstrap elements for a more consistent look */
+            .card {
+                background-color: #343a40; /* Adjust color as needed */
+                border-color: #454d55; /* Adjust color as needed */
+            }
+            }
+
     </style>
     <link rel="shortcut icon" href="./img/favicon-16x16.png" type="image/x-icon">
 </head>
 
 <body class="d-flex flex-column justify-content-center align-items-center">
+<button id="darkModeToggle" class="btn btn-primary position-absolute top-0 end-0 mt-2 me-2">Dark Mode</button>
+
     <div class="alert alert-success my-5">
         Welcome! You are now signed in to your account.
     </div>
-    <div class="container testBorder">
+    <div class="container testBorder card">
         <div class="row justify-content-center">
             <div class=" text-center">
                 <img src="./img/capy.jpg" style="margin-top: 10px;" class="img-fluid rounded-circle border border-3 border-primary"
@@ -136,6 +155,27 @@ mysqli_close($link);
                 xhr.send("room=" + encodeURIComponent(roomName));
             }
         }
+
+        const darkModeToggle = document.getElementById('darkModeToggle');
+
+darkModeToggle.addEventListener('click', function() {
+  const body = document.body;
+  body.classList.toggle('dark-mode');
+
+  // Save dark mode preference in local storage
+  if (body.classList.contains('dark-mode')) {
+    localStorage.setItem('darkMode', 'on');
+  } else {
+    localStorage.removeItem('darkMode');
+  }
+});
+
+// Check for saved dark mode preference on page load
+const darkModePref = localStorage.getItem('darkMode');
+if (darkModePref === 'on') {
+  document.body.classList.add('dark-mode');
+}
+
 </script>
 
 </body>
