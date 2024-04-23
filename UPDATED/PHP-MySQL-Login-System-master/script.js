@@ -21,6 +21,17 @@ function addNewRoom() {
         var roomsContainer = document.getElementById("roomsContainer");
         roomsContainer.appendChild(newRoomDiv);
 
-        console.log("New room '" + roomName + "' added.");
+        // console.log("New room '" + roomName + "' added.");
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", 'save_room.php', true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function() {
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                console.log(this.responseText);  // Log the response from the PHP script
+            }
+        }
+        xhr.send("roomName=" + roomName + "&userId=" + userId);
     }
 }
+
