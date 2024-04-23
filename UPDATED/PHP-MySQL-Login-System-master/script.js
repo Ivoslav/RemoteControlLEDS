@@ -20,7 +20,6 @@ function addNewRoom() {
         var roomsContainer = document.getElementById("roomsContainer");
         roomsContainer.appendChild(newRoomDiv);
 
-        client.subscribe(roomName.toLowerCase().replace(/\s/g, ''));
         console.log("New room '" + roomName + "' added.");
     }
 }
