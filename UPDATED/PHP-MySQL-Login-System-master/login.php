@@ -82,21 +82,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <script defer src="./js/script.js"></script>
   <style>
     .dark-mode {
-  background-color: #212529; /* Adjust background color as needed */
-  color: #fff;
+      background-color: #212529;
+      color: #fff;
     }
-  .dark-mode input {
-  background-color: #3f424a; /* Adjust color as needed */
-  color: #fff; /* Ensure text is readable */
-  border-color: #545c64; /* Adjust border color as needed */
-}
 
-
+    .dark-mode input {
+      background-color: #3f424a;
+      color: #fff;
+      border-color: #545c64;
+    }
   </style>
 </head>
 
 <body>
-<button id="darkModeToggle" class="btn btn-primary position-absolute top-0 end-0 mt-2 me-2">🌙</button>
+  <button id="darkModeToggle" class="btn btn-primary position-absolute top-0 end-0 mt-2 me-2">🌙</button>
   <div class="container">
     <div class="row min-vh-100 justify-content-center align-items-center">
       <div class="col-lg-5">
@@ -137,23 +136,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <script>
   const darkModeToggle = document.getElementById('darkModeToggle');
 
-darkModeToggle.addEventListener('click', function() {
-  const body = document.body;
-  body.classList.toggle('dark-mode');
+  darkModeToggle.addEventListener('click', function() {
+    const body = document.body;
+    body.classList.toggle('dark-mode');
 
-  // Save dark mode preference in local storage
-  if (body.classList.contains('dark-mode')) {
-    localStorage.setItem('darkMode', 'on');
-  } else {
-    localStorage.removeItem('darkMode');
+    if (body.classList.contains('dark-mode')) {
+      localStorage.setItem('darkMode', 'on');
+    } else {
+      localStorage.removeItem('darkMode');
+    }
+  });
+
+  const darkModePref = localStorage.getItem('darkMode');
+  if (darkModePref === 'on') {
+    document.body.classList.add('dark-mode');
   }
-});
-
-// Check for saved dark mode preference on page load
-const darkModePref = localStorage.getItem('darkMode');
-if (darkModePref === 'on') {
-  document.body.classList.add('dark-mode');
-}
 </script>
 
 </html>

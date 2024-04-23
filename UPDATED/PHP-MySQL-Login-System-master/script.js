@@ -28,7 +28,7 @@ function addNewRoom() {
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.onreadystatechange = function() {
             if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                console.log(this.responseText);  // Log the response from the PHP script
+                console.log(this.responseText);
             }
         }
         xhr.send("roomName=" + roomName + "&userId=" + userId);
