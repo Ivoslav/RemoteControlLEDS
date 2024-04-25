@@ -1,7 +1,7 @@
 var roomName;
 
 function addNewRoom() {
-    roomName = prompt("Enter the name of the new room:");
+    roomName = prompt("Въведете името на новата стая:");
     if (roomName) {
         var newRoomDiv = document.createElement("div");
         newRoomDiv.classList.add("room", "card", "p-3", "text-center");
@@ -12,7 +12,7 @@ function addNewRoom() {
 
         var roomButton = document.createElement("button");
         roomButton.classList.add("btn", "btn-primary", "btn-lg");
-        roomButton.textContent = "Turn On";
+        roomButton.textContent = "Включи";
         roomButton.setAttribute("data-state", "on");
         roomButton.setAttribute("onclick", "toggleRoom(this)");
 
@@ -40,11 +40,11 @@ function toggleRoom(button) {
 
     if (currentState === "on") {
         publishMessage(roomName.toLowerCase().replace(/\s/g, ''), 'on');
-        button.textContent = "Turn Off";
+        button.textContent = "Изключи";
         button.setAttribute("data-state", "off");
     } else {
         publishMessage(roomName.toLowerCase().replace(/\s/g, ''), 'off');
-        button.textContent = "Turn On";
+        button.textContent = "Включи";
         button.setAttribute("data-state", "on");
     }
 }

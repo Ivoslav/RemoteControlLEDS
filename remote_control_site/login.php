@@ -13,13 +13,13 @@ $user_login = $user_password = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (empty(trim($_POST["user_login"]))) {
-    $user_login_err = "Please enter your username or an email id.";
+    $user_login_err = "Въведете потребителско име или имейл адрес.";
   } else {
     $user_login = trim($_POST["user_login"]);
   }
 
   if (empty(trim($_POST["user_password"]))) {
-    $user_password_err = "Please enter your password.";
+    $user_password_err = "Въведете парола.";
   } else {
     $user_password = trim($_POST["user_password"]);
   }
@@ -47,11 +47,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               echo "<script>" . "window.location.href='./'" . "</script>";
               exit;
             } else {
-              $login_err = "The email or password you entered is incorrect.";
+              $login_err = "Имейлът или паролата са невалидни.";
             }
           }
         } else {
-          $login_err = "Invalid username or password.";
+          $login_err = "Невалидно потребителско име или парола.";
         }
       } else {
         echo "<script>" . "alert('Oops! Something went wrong. Please try again later.');" . "</script>";
@@ -105,27 +105,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         ?>
         <div class="form-wrap border rounded p-4">
-          <h1>Log In</h1>
-          <p>Please login to continue</p>
+          <h1>Влизане</h1>
+          <p>Влезте във вашия профил</p>
           <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" novalidate>
             <div class="mb-3">
-              <label for="user_login" class="form-label">Email or username</label>
+              <label for="user_login" class="form-label">Потребителско име или имейл адрес</label>
               <input type="text" class="form-control" name="user_login" id="user_login" value="<?= $user_login; ?>">
               <small class="text-danger"><?= $user_login_err; ?></small>
             </div>
             <div class="mb-2">
-              <label for="password" class="form-label">Password</label>
+              <label for="password" class="form-label">Парола</label>
               <input type="password" class="form-control" name="user_password" id="password">
               <small class="text-danger"><?= $user_password_err; ?></small>
             </div>
             <div class="mb-3 form-check">
               <input type="checkbox" class="form-check-input" id="togglePassword">
-              <label for="togglePassword" class="form-check-label">Show Password</label>
+              <label for="togglePassword" class="form-check-label">Покажи паролата</label>
             </div>
             <div class="mb-3">
-              <input type="submit" class="btn btn-primary form-control" name="submit" value="Log In">
+              <input type="submit" class="btn btn-primary form-control" name="submit" value="Влез">
             </div>
-            <p class="mb-0">Don't have an account ? <a href="./register.php">Sign Up</a></p>
+            <p class="mb-0">Нямате профил? <a href="./register.php">Регистрирайте се</a></p>
           </form>
         </div>
       </div>

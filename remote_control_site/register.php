@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           mysqli_stmt_store_result($stmt);
 
           if (mysqli_stmt_num_rows($stmt) == 1) {
-            $username_err = "This username is already registered.";
+            $username_err = "Това потребителско име е заето.";
           }
         } else {
           echo "<script>" . "alert('Oops! Something went wrong. Please try again later.')" . "</script>";
@@ -34,11 +34,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
   if (empty(trim($_POST["email"]))) {
-    $email_err = "Please enter an email address";
+    $email_err = "Въведете имейл адрес.";
   } else {
     $email = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-      $email_err = "Please enter a valid email address.";
+      $email_err = "Въведете валиден имейл адрес.";
     } else {
       $sql = "SELECT users_id FROM users WHERE email = ?";
 
@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           mysqli_stmt_store_result($stmt);
 
           if (mysqli_stmt_num_rows($stmt) == 1) {
-            $email_err = "This email is already registered.";
+            $email_err = "Този имейл адрес е зает.";
           }
         } else {
           echo "<script>" . "alert('Oops! Something went wrong. Please try again later.');" . "</script>";
@@ -63,11 +63,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
   if (empty(trim($_POST["password"]))) {
-    $password_err = "Please enter a password.";
+    $password_err = "Въведете парола.";
   } else {
     $password = trim($_POST["password"]);
     if (strlen($password) < 8) {
-      $password_err = "Password must contain at least 8 or more characters.";
+      $password_err = "Паролата трябва да има 8 или повече символа.";
     }
   }
 
@@ -82,7 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $param_password = password_hash($password, PASSWORD_DEFAULT);
 
       if (mysqli_stmt_execute($stmt)) {
-        echo "<script>" . "alert('Registeration completed successfully. Login to continue.');" . "</script>";
+        echo "<script>" . "alert('Регистрацията е успешна. Влезте в профила си, за да продължите.');" . "</script>";
         echo "<script>" . "window.location.href='./login.php';" . "</script>";
         exit;
       } else {
@@ -130,32 +130,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="row min-vh-100 justify-content-center align-items-center">
       <div class="col-lg-5">
         <div class="form-wrap border rounded p-4">
-          <h1>Sign up</h1>
-          <p>Please fill this form to register</p>
+          <h1>Вписване</h1>
+          <p>Попълнете формата, за да се регистрирате</p>
           <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" novalidate>
             <div class="mb-3">
-              <label for="username" class="form-label">Username</label>
+              <label for="username" class="form-label">Потребителско име</label>
               <input type="text" class="form-control" name="username" id="username" value="<?= $username; ?>">
               <small class="text-danger"><?= $username_err; ?></small>
             </div>
             <div class="mb-3">
-              <label for="email" class="form-label">Email Address</label>
+              <label for="email" class="form-label">Имайл адрес</label>
               <input type="email" class="form-control" name="email" id="email" value="<?= $email; ?>">
               <small class="text-danger"><?= $email_err; ?></small>
             </div>
             <div class="mb-2">
-              <label for="password" class="form-label">Password</label>
+              <label for="password" class="form-label">Парола</label>
               <input type="password" class="form-control" name="password" id="password" value="<?= $password; ?>">
               <small class="text-danger"><?= $password_err; ?></small>
             </div>
             <div class="mb-3 form-check">
               <input type="checkbox" class="form-check-input" id="togglePassword">
-              <label for="togglePassword" class="form-check-label">Show Password</label>
+              <label for="togglePassword" class="form-check-label">Покажи паролата</label>
             </div>
             <div class="mb-3">
-              <input type="submit" class="btn btn-primary form-control" name="submit" value="Sign Up">
+              <input type="submit" class="btn btn-primary form-control" name="submit" value="Регистрация">
             </div>
-            <p class="mb-0">Already have an account ? <a href="./login.php">Log In</a></p>
+            <p class="mb-0">Вече имате профил? <a href="./login.php">Влезте</a></p>
           </form>
         </div>
       </div>
