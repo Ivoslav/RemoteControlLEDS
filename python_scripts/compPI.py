@@ -24,17 +24,17 @@ def on_message(client, userdata, msg):
 
     room_name, state = payload_parts[:2]
     # Control GPIO based on room name and state
-    if room_name == "test1":
+    if room_name == "Баня":
         if state == "on":
             GPIO.output(20, GPIO.HIGH)
         elif state == "off":
             GPIO.output(20, GPIO.LOW)
-    elif room_name == "test2":
+    elif room_name == "Спалня":
         if state == "on":
             GPIO.output(21, GPIO.HIGH)
         elif state == "off":
             GPIO.output(21, GPIO.LOW)
-    elif room_name == "test3":
+    elif room_name == "Хол":
         if state == "on":
             GPIO.output(26, GPIO.HIGH)
         elif state == "off":
