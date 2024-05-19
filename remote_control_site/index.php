@@ -64,7 +64,7 @@ mysqli_close($link);
                 echo "<div class='room card p-3 text-center position-relative'>";
                 echo "<h4 class='my-4'>$room</h4>";
                 echo "<button class='btn btn-danger btn-sm remove-btn position-absolute top-0 end-0 d-none' onclick='removeRoom(this)'>X</button>";
-                echo "<button class='btn btn-primary btn-lg' data-room='$room' onclick='toggleRoom(this)'>Включи</button>";
+                echo "<button class='btn btn-primary btn-lg' data-room='$room' onclick='toggleRoom(this)'>Включен</button>";
                 echo "</div>";
             }
             ?>

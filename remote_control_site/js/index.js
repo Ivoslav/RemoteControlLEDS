@@ -1,4 +1,15 @@
 var roomName;
+const userPasswordEl = document.querySelector("#password");
+const togglePasswordEl = document.querySelector("#togglePassword");
+
+togglePasswordEl.addEventListener("click", function () {
+  if (this.checked === true) {
+    userPasswordEl.setAttribute("type", "text");
+  } else {
+    userPasswordEl.setAttribute("type", "password");
+  }
+});
+
 
 function addNewRoom() {
     roomName = prompt("Въведете името на новата стая:");
@@ -12,7 +23,7 @@ function addNewRoom() {
 
         var roomButton = document.createElement("button");
         roomButton.classList.add("btn", "btn-primary", "btn-lg");
-        roomButton.textContent = "Включи";
+        roomButton.textContent = "Включен";
         roomButton.setAttribute("data-state", "on");
         roomButton.setAttribute("onclick", "toggleRoom(this)");
 
@@ -40,11 +51,11 @@ function toggleRoom(button) {
 
     if (currentState === "on") {
         publishMessage(roomName.toLowerCase().replace(/\s/g, ''), 'on');
-        button.textContent = "Изключи";
+        button.textContent = "Изключен";
         button.setAttribute("data-state", "off");
     } else {
         publishMessage(roomName.toLowerCase().replace(/\s/g, ''), 'off');
-        button.textContent = "Включи";
+        button.textContent = "Включен";
         button.setAttribute("data-state", "on");
     }
 }

@@ -6,11 +6,11 @@ $username = $email = $password = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (empty(trim($_POST["username"]))) {
-    $username_err = "Please enter a username.";
+    $username_err = "Моля въведете потребителско име.";
   } else {
     $username = trim($_POST["username"]);
     if (!ctype_alnum(str_replace(array("@", "-", "_"), "", $username))) {
-      $username_err = "Username can only contain letters, numbers and symbols like '@', '_', or '-'.";
+      $username_err = "Потребителското име може да съдъра само букви, числа и символи като '@', '_', or '-'.";
     } else {
       $sql = "SELECT users_id FROM users WHERE username = ?";
 
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $username_err = "Това потребителско име е заето.";
           }
         } else {
-          echo "<script>" . "alert('Oops! Something went wrong. Please try again later.')" . "</script>";
+          echo "<script>" . "alert('Опс! Има някаква грешка. Моля опитайте по-късно.')" . "</script>";
         }
 
         mysqli_stmt_close($stmt);
@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $email_err = "Този имейл адрес е зает.";
           }
         } else {
-          echo "<script>" . "alert('Oops! Something went wrong. Please try again later.');" . "</script>";
+          echo "<script>" . "alert('Опс! Има някаква грешка. Моля опитайте по-късно.');" . "</script>";
         }
 
         mysqli_stmt_close($stmt);
@@ -86,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<script>" . "window.location.href='./login.php';" . "</script>";
         exit;
       } else {
-        echo "<script>" . "alert('Oops! Something went wrong. Please try again later.');" . "</script>";
+        echo "<script>" . "alert('Опс! Има някаква грешка. Моля опитайте по-късно.');" . "</script>";
       }
 
       mysqli_stmt_close($stmt);
@@ -108,7 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
   <link rel="stylesheet" href="./css/main.css">
   <link rel="shortcut icon" href="./img/favicon-16x16.png" type="image/x-icon">
-  <script defer src="./js/script.js"></script>
+  <script defer src="./js/index.js"></script>
   <style>
     .dark-mode {
       background-color: #212529;
