@@ -61,7 +61,7 @@ function toggleRoom(button) {
 }
 
 function publishMessage(roomName, state) {
-    var topic = 'ivan';
+    var topic = 'dyno';
 
     var message = roomName + ' ' + state;
     var Message = new Paho.MQTT.Message(message);
@@ -106,7 +106,7 @@ function onMessageArrived(message) {
 }
 
 function onConnect() {
-    topic = 'ivan';
+    topic = 'dyno';
     console.log("Subscribing to topic " + topic);
     client.subscribe(topic);
 
